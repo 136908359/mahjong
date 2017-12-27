@@ -1,1 +1,1 @@
-ddsddddd
+add mahjong game in gateway
