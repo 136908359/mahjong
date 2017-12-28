@@ -1,0 +1,44 @@
+<article class="page-container">
+	<form action="" method="post" class="form form-horizontal">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">开始时间：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input placeholder="请输入日期" class="laydate-icon" onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" name="start_time"/>				
+			</div>
+		</div>		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">结束时间：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input placeholder="请输入日期" class="laydate-icon" onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" name="end_time"/>
+			</div>
+		</div>		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">时间间隔：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="（以S为单位）" name="interval">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">广播内容：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<textarea name="content" cols="" rows="" class="textarea"  placeholder="请输入内容..." onKeyUp="textarealength(this,100)"></textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+			</div>
+		</div>				
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</article>
+<script>
+$(document).ready(function() {
+	$(':submit').click(function(){
+		layer.confirm('确定提交？',function(index){
+			$('form').submit();
+		});
+		return false;
+	});
+})
+</script>

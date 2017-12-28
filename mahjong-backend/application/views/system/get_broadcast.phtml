@@ -1,0 +1,33 @@
+﻿<div class="page-container">
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a href="add_broadcast" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加广播</a></span> <span class="r">共有数据：<strong><?php echo count($broadcast_list);?></strong> 条</span> </div>
+	<div class="mt-20">
+	<table class="table table-border table-bordered table-hover table-bg table-sort">
+		<thead>
+			<tr class="text-c">
+				<th width="70">编号</th>
+				<th width="250">广播内容</th>
+				<th width="90">开始时间</th>
+				<th width="90">结束时间</th>
+				<th width="70">间隔时间</th>
+				<th width="70">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach($broadcast_list as $v){ ?>			
+			<tr class="text-c">				
+				<td><?php echo $v['id']?></td>
+				<td><?php echo $v['content']?></td>
+				<td><?php echo $v['start_time']?></td>
+				<td><?php echo $v['end_time']?></td>
+				<td><?php echo $v['interval']?></td>
+				<td class="td-manage"><a title="编辑" href="edit_broadcast/<?php echo $v['id']?>" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a></td>
+			</tr>
+			<?php }?>
+		</tbody>
+	</table>
+	</div>
+</div>
+
+
+
+

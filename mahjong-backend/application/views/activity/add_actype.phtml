@@ -1,0 +1,62 @@
+<article class="page-container">
+	<form action="" method="post" class="form form-horizontal" id="form-member-add" enctype="multipart/form-data" onsubmit="return checkForm()">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">活动id：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="请输入活动id" id="id" name="id">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">活动类型：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="最好不要超过8个字" id="title" name="title">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">备注：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="要不说点什么..." name="coment">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</article>
+
+<script type="text/javascript">
+	function checkForm(){
+		var title = document.getElementById('title');
+		var id = document.getElementById('id');
+		if(id.value==null || id.value==''){
+			alert('请输入活动id');
+			id.focus();
+			return false;
+		}
+		if(title.value==null || title.value==''){
+			alert('请输入活动类型');
+			title.focus();
+			return false;
+		}
+		return true;
+	}
+	
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,26 @@
+<article class="page-container">
+	<form action="" method="post" class="form form-horizontal">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">渠道ID：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input value="<?php echo @$chan_id?>" class="input-text" name="chan_id"/>			
+			</div>
+		</div>		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">备注：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<textarea name="coment" cols="" rows="" class="textarea"  placeholder="请输入内容..." onKeyUp="textarealength(this,100)"><?php echo @$coment;?></textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+			</div>
+
+			</div>
+		</div>		
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input type="hidden" name="id" value="<?php echo @$id;?>">
+				<input class="btn btn-primary radius" type="submit" value="确定">
+			</div>
+		</div>
+	</form>
+</article>
+

@@ -1,0 +1,36 @@
+<article class="page-container">
+	<form action="" method="post" class="form form-horizontal" id="form-member-add">		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">表名：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="<?php echo @$name;?>" placeholder="" name="name">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">备注：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="<?php echo @$comment;?>" placeholder="" name="comment">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">配置参数：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<textarea style="height:100%" id="content" name="content" rows="30" class="textarea"  placeholder=""><?php echo @$content;?></textarea>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</article>
+
+<script type="text/javascript">
+	var err = "<?php echo @$err;?>";
+	if ( err != "" ) {
+		alert(err);
+	}
+</script>
+
+

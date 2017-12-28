@@ -1,0 +1,25 @@
+﻿<div class="page-container">
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a href="add_group" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加分组</a></span> <span class="r">共有数据：<strong><?php echo count($group_list);?></strong> 条</span> </div>
+	<div class="mt-20">
+	<table class="table table-border table-bordered table-hover table-bg table-sort">
+		<thead>
+			<tr class="text-c">
+				<th width="80">Id</th>
+				<th width="40">标题</th>
+				<th width="150">备注</th>
+				<th width="100">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach($group_list as $group): ?>
+			<tr class="text-c">
+				<td><?php echo $group['id'];?></td>
+				<td><?php echo $group['title'];?></td>
+				<td><?php echo $group['coment'];?></td>				
+				<td class="td-manage"><a title="编辑" href="edit_group/<?php echo $group['id'];?>" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a></td>				
+			</tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+	</div>
+</div>

@@ -1,0 +1,32 @@
+<div class="page-container">
+		<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a href="add_client_version" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加版本</a></span> </div>
+		<table class="table table-border table-bordered table-bg table-hover table-sort dataTable no-footer mt-20">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>渠道号</th>
+					<th>版本</th>
+					<th>更新方式</th>
+					<th>变更日志</th>
+					<th>强更地址</th>
+					<th>配置参数</th>
+					<th>时间</th>
+					<th></th>
+				</tr>
+			</thead>
+			<?php foreach($rows as $row):?>
+				<tr>				
+					<td ><?php echo $row['id']; ?></td>
+					<td><?php echo $row['chan_id']; ?></td>
+					<td><?php echo $row['version']; ?></td>
+					<td><?php echo $row['update_type']; ?></td>
+					<td><?php echo $row['change_log']; ?></td>
+					<td style="width:20%"><?php echo $row['url']; ?></td>
+					<td style="width:40%"><?php echo $row['config']; ?></td>
+					<td><?php echo $row['last_time']; ?></td>
+					<td class="td-manage"><a title="编辑" href="/v1/system/add_client_version/<?php echo $row['id'];?>" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont"></i></a> </td>
+				</tr>
+			<?php endforeach;?>
+		</table>
+</div>
+

@@ -1,0 +1,24 @@
+	 <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+          <ul>
+            <li>
+              <a data-theme="c" data-ajax="false" href="/public/share/get_info">个人中心</a>
+            </li>
+
+            <li>
+              <a data-theme="c" data-ajax="false" href="/public/share/get_last_share">我的推广</a>
+            </li>
+
+            <li>
+              <a data-theme="c" data-ajax="false" href="/public/share/get_last_rebate">充值返利</a>
+            </li>
+          </ul>
+        </div>
+	  </div>
+	  <script>
+	  	url = location.pathname;	
+		$("[href='"+url+"']").attr("class","ui-bnt-active ui-state-persist");
+	  </script>
+    </div> <!-- page -->
+  </body>
+</html>

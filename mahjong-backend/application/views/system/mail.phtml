@@ -1,0 +1,79 @@
+<article class="page-container">
+	<form action="" method="post" class="form form-horizontal" id="form-member-add" onsubmit="return checksubmit()">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">玩家ID：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" placeholder="多个玩家用;隔开（分号为英文状态下）" name="uid_str" value="<?php echo @$uid; ?>" />
+			</div>
+		</div>		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">全服发送：</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+				<div class="check-box">
+					<input type="checkbox" name="mass_mail"/>
+					<label>勾选后忽略玩家ID</label>
+				</div>
+			</div>
+		</div>		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">邮件标题：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="title" name="title">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">邮件内容：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<textarea name="content" cols="" rows="" class="textarea"  placeholder="邮件格式：您收到金币1000，经验100，钻石100，VIP经验100，请注意查收..." onKeyUp="textarealength(this,1000)" ></textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/1000</p>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">发送奖励：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="1000*10000;1001*50000（分号为英文状态下）" id="award" name="award">
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="发送">
+			</div>
+		</div>
+	<div class="mt-20">
+	<table class="table table-border table-bordered table-hover table-bg table-sort">
+		<tbody>
+		<thead>
+			<tr class="text-c">
+				<th width="70">序号</th>
+				<th width="250">物品ID</th>
+				<th width="90">物品名称</th>
+			</tr>
+		</thead>
+
+			<?php foreach($items as $line=>$item): ?>			
+			<tr class="text-c">				
+				<td><?php echo $line+1; ?></td>
+				<?php foreach($item as $attr): ?>			
+					<td><?php echo $attr; ?></td>
+				<?php endforeach; ?>
+			</tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+	</div>
+
+	</form>
+</article>
+
+
+<script type="text/javascript">
+	function checksubmit(){
+		if(confirm('确定发送此邮件？')){
+			return true;
+		}else{
+			return false;
+			}		
+	}
+</script>
+
+

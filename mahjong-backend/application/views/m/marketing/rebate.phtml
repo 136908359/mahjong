@@ -1,0 +1,44 @@
+        <div data-role="content" class="ui-content">
+            <table style="width: 96%;margin-left: 2%; border:1px lightgray;border-collapse: collapse;" class="ui-shadow" id="myTable">
+                <thead>
+                    <tr>
+                        <th colspan="6">最近返利</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="style1">
+                        <td width="10%">序号</td>
+                        <td width="20%">用户ID</td>
+                        <td width="15%">昵称</td>
+                        <td width="15%">类别</td>
+                        <td width="15%">提成</td>
+                        <td>时间</td>
+                    </tr>
+					<?php if ( !$rows ): ?>
+                    <tr><td colspan="6">无记录</td></tr>
+					<?php else: ?>
+					<?php foreach ($rows as $id=>$row): ?>
+                    <tr>
+						<td><?php echo $id+1 ?></td>
+						<td><?php echo $row['buy_uid']; ?></td>
+						<td><?php echo $row['nickname']; ?></td>
+						<?php if ($uid==$row['parent_uid']): ?>
+						<td>会员</td>
+						<td><?php echo $row['parent_rebate']; ?></td>
+						<?php else: ?>
+						<td>代理</td>
+						<td><?php echo $row['grandpa_rebate']; ?></td>
+						<?php endif;?>
+						<td><?php echo $row['create_time']; ?></td>
+                    </tr>
+					<?php endforeach;?>
+					<?php endif; ?>
+                </tbody>
+            </table>
+		<div>
+			<a href="/public/marketing/rebate?page=<?php echo @$cur_page-1;?>" data-role="button" data-inline="true" data-ajax="false">上一页</a>
+			<?php echo @$cur_page."/".@$total_page."页";?>
+			<a href="/public/marketing/rebate?page=<?php echo @$cur_page+1;?>" data-role="button" data-inline="true" data-ajax="false">下一页</a>
+		</div>
+    </div>
+

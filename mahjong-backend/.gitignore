@@ -1,0 +1,6 @@
+application/logs/*
+*.tar.gz
+*_server
+xmmj0
+xmmj
+update.zip

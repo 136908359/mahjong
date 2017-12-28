@@ -1,0 +1,104 @@
+		<div data-role="content" role="main">
+			<form action="/public/share/update_info" method="post" name="addagmentform">
+				<table data-role="table" id="myTable">
+					<thead>
+						<tr>
+							<th data-priority="1"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td style="text-align: center"><label><b>填写推广员信息</b></label></td>
+						</tr>
+						<tr>
+							<td style="text-align: center"><label><b>真实姓名:</b></label>
+								<input type="text" name="name" id="name" placeholder="真实姓名">
+								<p style="text-align: center">一定要与微信真实认证的姓名完全一致<br><label style="color: #8b0000">微信绑定银行卡的真实姓名</label>,否则无法提现到账</p>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: center;border-bottom: 0px;"><label><b>手机号:</b></label>
+								<input type="tel" name="phone" id="phone" placeholder="手机号">
+								<div style=" border-left: 1px solid lightgray; border-right: 1px solid lightgray;">
+									<div style="float: left;width: 40%;">
+										<input type="number" name="vcode" id="vcode" placeholder="请输入验证码">
+									</div>
+									<div style="float: left;width: 40%;margin-left:5%; " id="sendBtn">
+										 <input type="button" data-inline="true"
+											 id="sendcode" value="获取验证码">
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: center">
+								<input type="button" id="bc" data-theme="b" value="创建推广员">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+	</div>
+	<script>
+		var countdown = 300;
+		$("#sendcode").click(function () {
+			var phone= $("#phone").val();
+			if (checkPhone(phone) == false) {
+				msg('手机号码不正确');
+				return false;
+			}
+
+			$.post("/public/share/sms", { 'phone': phone },
+				function (msg) {
+				if (msg == "SUCCESS") {
+					msg = "短信发送成功";
+					settime();
+				}
+				layer.open({
+					content: msg,
+					skin: 'msg',
+					time: 3
+				});
+			});
+		});
+
+		function settime() {
+			var obj = $("#sendcode").prev(".ui-btn-inner").children(".ui-btn-text");
+			if (countdown == 0) {
+				$("#sendcode").attr({ "disabled": false });
+				obj.text('获取验证码');
+				countdown = 120;
+				return;
+			} else {
+				$("#sendcode").attr({ "disabled": "disabled" });
+				var text = "重新发送(" + countdown + ")";
+				obj.text(text);
+				countdown--;
+			}
+			setTimeout(function () { settime() }, 1000);
+		}
+
+		$("#bc").click(function () {
+			name = $("#name").val();
+			phone= $("#phone").val();
+			vcode = $("#vcode").val();
+			if (name == "" || phone == "" || vcode == "") {
+				msg('输入不完整');
+			} else {
+				document.addagmentform.submit();
+			}
+
+		});
+
+		//校验手机号是否合法
+		function checkPhone(phone) {
+			return /^1\d{10}$/.test(phone);
+		}
+
+		function msg(txt) {
+			layer.open({
+				content: txt
+				, btn: '好的'
+			});
+		}
+	</script>
+	

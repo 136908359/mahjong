@@ -1,0 +1,48 @@
+<article class="page-container">
+	<form action="" method="post" class="form form-horizontal">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">二八杠庄家胜率：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="<?php echo @$config["ErbagangRate"]/MAX_RAND_RANGE;?>" placeholder="0~1之间" name="erbagang_rate">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">百人牛牛庄家胜率：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="<?php echo @$config["BairenniuniuRate"]/MAX_RAND_RANGE;?>" placeholder="0~1之间" name="bairenniuniu_rate">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">百人扎金花庄家胜率：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="<?php echo @$config["BairenzhajinhuaRate"]/MAX_RAND_RANGE;?>" placeholder="0~1之间" name="bairenzhajinhua_rate">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">二八杠上庄最低金币：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="<?php echo @$config["ErbagangDealerLimit"];?>" placeholder="" name="erbagang_dealer_limit">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">百人牛牛上庄最低金币：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="<?php echo @$config["BairenniuniuDealerLimit"];?>" placeholder="" name="bairenniuniu_dealer_limit">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">百人扎金花上庄最低金币：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="<?php echo @$config["BairenzhajinhuaDealerLimit"];?>" placeholder="" name="bairenzhajinhua_dealer_limit">
+			</div>
+		</div>
+
+
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</article>
+

@@ -1,0 +1,46 @@
+<div class="page-container">
+<div class="pd-20">
+	<div class="text-c">							
+	<form class="form-horizontal" method="get" action="/v1/marketing/daily">			
+		时间：
+			<input value="<?php echo $start_time;?>" placeholder="开始时间" class="laydate-icon" onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" name="start_time"/>
+			-
+			<input value="<?php echo $end_time;?>" placeholder="结束时间" class="laydate-icon" onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" name="end_time"/>
+			
+			<input type="submit" class="btn btn-primary" value="查看" /> 
+		    <a class="btn btn-primary" href="/v1/marketing/daily?start_time=<?php echo date('Y-m-d');?>&end_time=<?php echo date('Y-m-d');?>" class="btn">今日 </a> 
+		    <a class="btn btn-primary" href="/v1/marketing/daily?start_time=<?php echo date('Y-m-d',strtotime("-6 day"));?>&end_time=<?php echo date('Y-m-d');?>" class="btn">七天</a> 
+		    <a class="btn btn-primary" href="/v1/marketing/daily?start_time=<?php echo date('Y-m-01');?>&end_time=<?php echo date('Y-m-d');?>" class="btn">当月</a> 
+		    <a class="btn btn-primary" href="/v1/marketing/daily?start_time=<?php echo date('Y-m-d',strtotime("-29 day"));?>&end_time=<?php echo date('Y-m-d');?>" class="btn">30天</a>
+		    <a class="btn btn-primary" download="日常数据V2.csv" class="btn" onclick="exportToExcel(this,'csv_data')">导出</a>
+	</form>
+	</div>
+	<div class="mt-20">
+	<table class="table table-border table-bordered table-bg table-hover table-sort dataTable no-footer mt-20" id="csv_data">
+		<thead>
+			<tr>
+				<th>日期</th>
+				<th>申请提现金额</th>
+				<th>发放提现金额</th>
+			</tr>
+		</thead>
+
+		<tr>
+			<th>总计</th>
+			<th><?php echo number_format(@$total_marketing_apply_rmb,1);?></th>
+			<th><?php echo number_format(@$total_marketing_agree_rmb,1);?></th>
+		</tr>
+
+		<?php for($t=$real_end_time;$t>$real_start_time;):?>
+			<?php $t=date('Y-m-d',strtotime("$t -1 day"));?>
+			<tr>
+				<td width="130px"><?php echo $t;?></td>
+				<td><?php echo number_format(@$day[$t]['marketing_apply_rmb'],1);?></td>
+				<td><?php echo number_format(@$day[$t]['marketing_agree_rmb'],1);?></td>
+			</tr>
+		<?php endfor;?>
+	</table>
+	</div>
+	<div class="pages"><?php echo $pages;?></div>
+</div>
+

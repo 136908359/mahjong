@@ -1,0 +1,51 @@
+﻿<div class="page-container">
+	<form method="get" action="/v1/share/get_last_member">	
+		<div>
+			玩家ID：
+			<input type="text" name="uid_str" class="input-text" value="<?php echo $uid_str; ?>" placeholder="批量输入，英语分号隔开"> 
+			日期：
+			<input value="<?php echo $start_time; ?>" placeholder="开始时间" class="laydate-icon" onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" name="start_time"/>
+			-
+			<input value="<?php echo $end_time; ?>" placeholder="结束时间" class="laydate-icon" onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" name="end_time"/>
+		    <input type="submit" class="btn btn-primary" value="搜索" />
+		</div>			
+	</form>
+
+	<table class="table table-border table-bordered table-bg table-hover table-sort dataTable no-footer mt-20">
+		<thead>
+			<tr>
+				<th width="5%">玩家ID</th>
+				<th width="15%">账号注册时间</th>
+				<th>昵称</th>
+				<th>房卡</th>
+				<th>充值总额</th>	
+				<th>返利总额</th>					
+				<th>余额</th>
+				<th>在途资金</th>						
+				<th>上级</th>
+				<th>二级人数</th>
+				<th>三级人数</th>
+				<th>二级返利</th>
+				<th>三级返利</th>
+			</tr>
+		</thead>
+		<?php foreach($members as $m): ?>
+			<tr>
+				<td><a  href="javascript:void(0)" onclick="Hui_admin_tab(this)" class="maincolor" data-title="个人中心" _href="/v1/share/get_user_info?uid=<?php echo @$m['uid'];?>" > <?php echo @$m['uid'];?></a></td>
+				<td><?php echo @$m['create_time']; ?></td>
+				<td><?php echo @$m['nickname']; ?></td>
+				<td><?php echo @$m['score_card']; ?></td>
+				<td><?php echo number_format(@$m['total_pay'],1); ?></td>
+				<td><?php echo number_format(@$m['total_rebate'],1); ?></td>
+				<td><?php echo @$m['balance']; ?></td>
+				<td><?php echo @$m['apply_rebate']; ?></td>
+				<td><?php echo @$m['parent_uid']; ?></td>
+				<td><a  href="javascript:void(0)" onclick="Hui_admin_tab(this)" class="maincolor" data-title="个人中心" _href="/v1/share/get_last_share?uid=<?php echo @$m['uid'];?>" > <?php echo @$m['users_lv2'];?></a></td>
+				<td><?php echo @$m['users_lv3']; ?></td>
+				<td><a  href="javascript:void(0)" onclick="Hui_admin_tab(this)" class="maincolor" data-title="个人中心" _href="/v1/share/get_last_rebate?uid=<?php echo @$m['uid'];?>" > <?php echo number_format(@$m['rebate_lv2'],1);?></a></td>
+				<td><?php echo number_format(@$m['rebate_lv3'],1); ?></td>
+			</tr>
+		<?php endforeach;?>
+	</table>
+	<div class="pages"><?php echo $pages;?></div>
+</div>

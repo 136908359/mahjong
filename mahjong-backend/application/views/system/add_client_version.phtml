@@ -1,0 +1,68 @@
+<article class="page-container">
+	<form action="" method="post" class="form form-horizontal" id="form-member-add">		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">渠道：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="<?php echo @$chan_id;?>" placeholder="ios" name="chan_id">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">版本：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="<?php echo @$version;?>" placeholder="1.0.0" name="version">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">更新方式：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+			<select class="input-text" name="update_type" style="width:10%">
+				<?php foreach (array('tip'=>'提示','force'=>'强更') as $type=>$msg):?>
+				<option value="<?php echo $type;?>" <?php if(@$update_type==$type):?>selected<?php endif; ?> > <?php echo $msg;?></option>
+				<?php endforeach;?>
+				</select>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">版本日志：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="<?php echo @$change_log;?>" placeholder="空空如也" name="change_log">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">强更地址：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="<?php echo @$url;?>" placeholder="链接" name="url">
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">配置参数：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<textarea id="config" name="config" cols="" rows="" class="textarea"  placeholder="JSON格式" onKeyUp="textarealength(this,4096)"><?php echo @$config;?></textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/4096</p>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</article>
+<script>
+$(document).ready(function() {
+	$(':submit').click(function(){
+		$config = $("#config").val();
+		try {
+			JSON.parse($config);
+		} catch (e) {
+			alert("配置参数格式有误");
+			return false;
+		}
+		layer.confirm('确定提交？',function(index){
+			$('form').submit();
+		});
+		return false;
+	});
+})
+</script>

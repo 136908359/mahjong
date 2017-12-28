@@ -1,0 +1,50 @@
+<div class="page-container">
+		<table class="table table-border table-bordered table-bg table-hover table-sort dataTable no-footer mt-20">
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>玩家ID</th>
+					<th>类别</th>
+					<th>手机号</th>
+					<th>内容</th>
+					<th>日期</th>
+					<th>状态</th>					
+				</tr>
+			</thead>
+			<?php foreach($advises as $row):?>
+				<tr>				
+					<td><?php echo $row['id']; ?></td>
+					<td><?php echo @$row['uid']; ?></td>
+					<td></td>
+					<td><?php echo $row['phone']; ?></td>
+					<td><?php echo $row['msg']; ?></td>
+					<td><?php echo $row['create_time']; ?></td>
+					<?php if ( $row["result"] == 1 ): ?>
+					<td id ="td_handle_<?php echo $row["id"];?>" class="td-manage"><a  href="javascript:void(0)" onclick="Hui_admin_tab(this)" class="maincolor" data-title="邮件" _href="/v1/system/mail?uid=<?php echo @$row['uid'];?>">打赏</a>&nbsp;&nbsp;<a id="a_ignore_<?php echo $row["id"];?>" class="maincolor" href="javascript:void(0)">忽略</a></td>				
+					<?php else: ?>
+					<td>已处理</td>
+					<?php endif; ?>
+				</tr>
+			<?php endforeach;?>
+		</table>
+	<div class="pages"><?php echo $pages;?></div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		var key = "a_ignore_";
+		$("a[id^="+key+"]").click(function(){
+			var id = $(this).attr("id").substring(key.length);
+			$.get("/v1/system/update_advise", {"id":id,"result":2},function(msg){
+				var tag = $("#td_handle_"+id);
+				if (msg == "SUCCESS") { 
+					tag.html("已处理");
+				} else {
+					alert(msg);
+				}
+			});
+		});
+	});
+</script>
+
+

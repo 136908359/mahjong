@@ -1,0 +1,45 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<script type="text/javascript" src="lib/PIE_IE678.js"></script>
+<![endif]-->
+
+<script type="text/javascript" src="/asset/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="/asset/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="/asset/lib/icheck/jquery.icheck.min.js"></script> 
+<script type="text/javascript" src="/asset/lib/jquery.validation/1.14.0/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/asset/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/asset/lib/jquery.validation/1.14.0/messages_zh.min.js"></script>
+<script type="text/javascript" src="/asset/static/h-ui/js/H-ui.js"></script>
+<script type="text/javascript" src="/asset/static/h-ui.admin/js/H-ui.admin.js"></script> 
+<script type="text/javascript" src="/asset/lib/tool.js"></script> 
+
+<link rel="stylesheet" type="text/css" href="/asset/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/asset/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="/asset/lib/Hui-iconfont/1.0.7/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="/asset/lib/icheck/icheck.css" />
+<link rel="stylesheet" type="text/css" href="/asset/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="/asset/static/h-ui.admin/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/asset/static/input/other.css" />
+<!-- <link rel="stylesheet" type="text/css" href="/asset/static/input/theme.min.css" /> -->
+<script type="text/javascript" src="/asset/static/input/laydate.js"></script>
+<!--[if IE 6]>
+<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title><?php echo $page_title;?></title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 
+	<?php foreach($page_nav as $nav): ?>
+	<span class="c-gray en">&gt;</span><?php echo $nav;?>
+	<?php endforeach; ?>
+	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>

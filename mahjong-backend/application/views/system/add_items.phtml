@@ -1,0 +1,27 @@
+<article class="page-container">
+	<form action="" method="get" class="form form-horizontal">
+		<div class="row cl">
+			<div class="col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="补偿&扣除">
+			注：物品实时到账，但后台数据更新存在几分钟延迟!
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">玩家ID：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input value="<?php echo @$uid?>" class="input-text" name="uid"/>
+			</div>
+		</div>
+
+		<?php foreach ( $items as $item): ?>	
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><?php echo $item["ShopTitle"]?>：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input value="" class="input-text" name="item_<?php echo $item["ShopID"]?>"/>
+			</div>
+		</div>
+		<?php endforeach;?>
+	</form>
+</article>
+

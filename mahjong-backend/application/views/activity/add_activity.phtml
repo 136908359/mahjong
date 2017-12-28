@@ -1,0 +1,128 @@
+<article class="page-container">
+	<form action="" method="post" class="form form-horizontal" id="form-member-add" enctype="multipart/form-data" onsubmit="return checkForm()">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">活动标题：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="title" name="title">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">开始时间：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input placeholder="请输入日期" class="laydate-icon" onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" id="start_time" name="start_time"/>				
+			</div>
+		</div>		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">结束时间：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input placeholder="请输入日期" class="laydate-icon" onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" id="end_time" name="end_time"/>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">活动形式：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+			<span class="select-box" style="width:150px;">
+			<select name="style" class="select">
+				<?php foreach ($acTypes as $v) {?>
+					<option value="<?php echo $v['id']?>"><?php echo $v['title']?></option>
+				<?php }?>		       
+		    </select>
+		    </span>		
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">活动图片：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="file" name="userfile"/>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">充值额度：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" placeholder="" name="rmb">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">商品ID：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" placeholder="" name="ShopId">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">排序：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" placeholder="" name="Rank">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">赠送物品：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" placeholder="1000*10000;1001*50000（请注意格式，分号为英文状态下，否则会报错）" name="items">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">物品ID参照表：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				1000 金币；1001 元宝；1002 兑换券；1003 话费券<br/>
+				2000	周卡；
+				2001	月卡；
+				2002	VIP铜卡；	
+				2003	VIP银卡；
+				2004	VIP金卡；
+				2005	喇叭<br/>
+				3000	赞；	
+				3001	玫瑰；	
+				3002	鸡蛋；
+				3003	拖鞋；
+				3004	水<br/>
+				4000	经验值；	
+				4001	VIP点						
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</article>
+
+<script type="text/javascript">
+	function checkForm(){
+		var title = document.getElementById('title');
+		var start_time = document.getElementById('start_time');
+		var end_time = document.getElementById('end_time');
+		if(title.value==null || title.value==''){
+			alert('请输入活动标题');
+			title.focus();
+			return false;
+			}
+		if(start_time.value==null || start_time.value==''){
+			alert('请输入活动开始时间');
+			start_time.focus();
+			return false;
+			}
+		if(end_time.value==null || end_time.value==''){
+			alert('请输入活动结束时间');
+			end_time.focus();
+			return false;
+			}
+		return true;
+	}	
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

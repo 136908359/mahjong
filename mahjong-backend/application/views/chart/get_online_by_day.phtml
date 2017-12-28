@@ -1,0 +1,103 @@
+<div class="page-container">
+	<div>
+		<form method="get" action="/v1/chart/get_online_by_day">
+			日期：
+			<input value="<?php echo $expect_day; ?>" placeholder="请选择日期" class="laydate-icon" onClick="laydate({istime: true, format: 'YYYY-MM-DD'})" name="day"/>
+			游戏：
+			<select class="input-text Wdate" style="width: 150px;" name="game"> 
+				<option value="全部">所有游戏</option>
+				<?php foreach ( $game_list as $game ): ?>
+				<option value="<?php echo $game; ?>" <?php if ( $expect_game == $game): ?> selected <?php endif;?> > <?php echo $game; ?></option>
+				<?php endforeach; ?> 
+			</select>
+			<input type="submit" class="btn btn-primary" value="搜索" />
+		</form>
+	</div>
+</div>
+<div id="main" style="width:100%;height:640px;"></div>
+
+<!-- 附加功能 -->
+<script src="/asset/lib/echarts/echarts.min.js"></script>
+<script type="text/javascript">
+	function pad(num, size) {
+		var s = ""+num;
+		while (s.length < size) s = "0" + s;
+		return s;
+	}
+	
+	// 基于准备好的dom，初始化echarts实例 ，第二个参数可以指定前面引入的主题
+	var chart = echarts.init(document.getElementById('main'));
+	var legends = <?php echo $legends; ?>; //所有场次
+	var samples = <?php echo $samples; ?>; //各场次下所有数据
+	var series_list = []; //所有数据
+	for(var i=0;i<legends.length;i++){
+		series_list.push({
+			name: legends[i],
+			type: 'line',
+			stack: '总量',
+			data: samples[legends[i]],				
+		});
+	}
+
+	var xpoints = [];//x轴坐标
+	for(var hour=0; hour<24; hour++) {
+		for (var minute=0; minute<60; minute+=10) {
+				xpoints.push(pad(hour,2)+':'+pad(minute,2));
+		}
+	}
+	// 指定图表的配置项和数据 树状图
+	var option = {
+		title: {
+			text: '在线人数',
+			subtext: '10分钟更新'
+		},
+		tooltip : {
+			trigger: 'axis',
+			/*axisPointer: {
+				type: 'cross',
+				label: {
+					backgroundColor: '#6a7985'
+				}
+			}
+			*/
+		},
+		legend: {
+			data:legends
+		},
+		toolbox: {
+			feature: {
+				saveAsImage: {}
+			}
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis : [
+			{
+				type : 'category',
+				boundaryGap : false,
+				data : xpoints
+			}
+		],
+		yAxis : [
+			{
+				type : 'value'
+			}
+		],
+		series: series_list
+	};
+	// 使用刚指定的配置项和数据显示图表
+	chart.setOption(option);
+</script>
+
+
+
+
+
+
+
+
+

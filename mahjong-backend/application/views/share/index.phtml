@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <title>推广员个人中心</title>
+        <link rel="stylesheet" type="text/css" href="/asset/share/css/site.css" />
+    </head>
+    <body>
+        <div class="container backgroud">
+            <img src="/asset/share/image/icon.jpg" height="auto" width="100%" atl="推广员个人中心" />
+        </div>
+        <div class="container main width-60-center2">
+            <a class="button width-80-center margin-ub-10 animation block textcenter" href="/public/share/about" target="_self" style="background-color:rgb(248,203,0);color:black;font-weight:bold; width:70%; margin-left:auto;margin-right:auto">推广员介绍</a>
+            <a class="button width-80-center margin-ub-10 animation block textcenter" href="/public/share/get_reward" target="_self" style="background-color:rgb(248,203,0);color:black;font-weight:bold; width:70%; margin-left:auto;margin-right:auto">我推广的账号</a>
+            <a class="button width-80-center margin-ub-8 animation block textcenter" href="/public/share/get_person_info" target="_self" style="background-color:rgb(248,203,0);color:black;font-weight:bold; width:70%; margin-left:auto;margin-right:auto">个人中心</a>
+        </div>
+        <script src="/asset/share/script/jquery-3.1.0.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $(function () {
+                function fixWindow() {
+                    var windowHeight = $(window).height();
+                    var windowWidth = $(window).width();
+                    var bodyHeight = $(document.body).outerHeight(true);
+                    $("body").css({ "height": windowHeight + "px", "width": windowWidth + "px" });
+                    $(".container.backgroud").css({ "height": windowHeight + "px", "width": windowWidth + "px", "overflow": "hidden" });
+                    $(".container.main").css({ "bottom": (windowHeight / 25) + "px" });
+                    $(".container.main a").css({"margin-top": (windowHeight / 65) + "px" });
+                }
+                fixWindow();
+                $(window).resize(function(){
+                    setTimeout(function(){
+                        fixWindow();
+                    },200);
+                });
+            });
+        </script>
+    </body>
+</html>

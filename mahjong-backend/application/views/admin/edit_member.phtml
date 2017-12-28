@@ -1,0 +1,69 @@
+<article class="page-container">
+	<form action="" method="post" class="form form-horizontal" id="form-member-add">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>账号ID：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="<?php echo $account;?>" placeholder="" id="account" name="account">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>密码：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="password" class="input-text" value="" placeholder="******" id="passwd" name="passwd">
+			</div>
+		</div>
+		<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3">分组：</label>
+			<div class="formControls col-xs-8 col-sm-9"> 
+				<span class="select-box" style="width:150px;">
+				<select class="select" name="group_id" size="1">
+				<?php foreach($group_list as $group): ?>
+				<option <?php if($group['id']==$group_id) echo 'selected="selected"'?> value="<?php echo $group['id'];?>"><?php echo $group['title'];?></option>
+				<?php endforeach; ?>
+				</select>
+				</span>
+			</div>
+		</div>
+		
+		<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3">关联渠道：</label>
+			<div class="formControls col-xs-8 col-sm-9"> 
+				<span class="select-box" style="width:150px;">
+				<select class="select" name="chan_id" size="1">
+				<?php foreach($chan_list as $v): ?>
+				<option <?php if($v['id']==$chan_id) echo 'selected="selected"'?> value="<?php echo $v['id'];?>"><?php echo $v['chan'];?></option>
+				<?php endforeach; ?>
+				</select>
+				</span>
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>显示：</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+				<div class="radio-box">
+					<input name="status" type="radio" id="status-1" value="forbid" <?php if($status == 'forbid') echo 'checked';?>>
+					<label for="status-1">禁用</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="status-2" name="status" value="normal" <?php if($status == 'normal') echo 'checked';?>>
+					<label for="stauts-2">激活</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">备注：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<textarea name="coment" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" onKeyUp="textarealength(this,100)"><?php echo $coment;?></textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</article>
+

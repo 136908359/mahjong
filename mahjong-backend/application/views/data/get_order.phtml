@@ -1,0 +1,74 @@
+﻿<div class="page-container">
+<div class="pd-20">
+	<div class="text-c">							
+	<form class="form-horizontal" method="get" action="/v1/data/get_order">			
+			订单号： 
+			<input type="text" name="order_id" class="input-text" style="width: 200px;" value="<?php echo @$order_id?>" placeholder="请输入订单号..."> 
+			玩家ID： 
+			<input type="text" name="uid" class="input-text" style="width:150px" value="<?php echo @$uid?>" placeholder="玩家ID">
+			渠道： 
+			<input class="input-text" style="width: 200px;" name="chan_id"/> 
+			时间：
+			<input value="<?php echo @$start_time;?>" placeholder="开始时间" class="laydate-icon" onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" name="start_time"/>
+			-
+			<input value="<?php echo @$end_time;?>" placeholder="结束时间" class="laydate-icon" onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" name="end_time"/>
+			
+			<input type="submit" class="btn btn-primary" value="查看" /> 
+		    <a class="btn btn-primary" href="/v1/data/get_order?start_time=<?php echo date('Y-m-d 00:00:00');?>&end_time=<?php echo date('Y-m-d H:i:s');?>" class="btn">今日 </a> 
+		    <a class="btn btn-primary" href="/v1/data/get_order?start_time=<?php echo date('Y-m-d 00:00:00',strtotime("-6 day"));?>&end_time=<?php echo date('Y-m-d H:i:s');?>" class="btn">七天</a> 
+		    <a class="btn btn-primary" href="/v1/data/get_order?start_time=<?php echo date('Y-m-01 00:00:00');?>&end_time=<?php echo date('Y-m-d H:i:s');?>" class="btn">当月</a> 
+		    <a class="btn btn-primary" href="/v1/data/get_order?start_time=<?php echo date('Y-m-d 00:00:00',strtotime("-29 day"));?>&end_time=<?php echo date('Y-m-d H:i:s');?>" class="btn">30天</a>
+
+		    <a class="btn btn-primary" download="订单.csv" class="btn" onclick="exportToExcel(this,'csv_data')">导出</a>
+	</form>
+	</div>
+
+	<div class="mt-20">
+	<table class="table table-border table-bordered table-bg table-hover table-sort dataTable no-footer" id="csv_data">
+		<thead>
+			<tr>
+				<th width="280px">订单号</th>
+				<th width="130px">时间</th>
+				<th>账号</th>
+				<th>渠道</th>						
+				<th>金额</th>	
+				<th>状态</th>					
+				<th>充值方式</th>
+				<th>游戏</th>
+			</tr>
+		</thead>
+
+			<tr>
+				<th>总计</th>
+				<th>--</th>
+				<th>--</th>
+				<th>--</th>
+				<th><?php echo @$total_rmb;?></th>
+				<th>--</th>
+				<th>--</th>
+				<th>--</th>
+			</tr>
+
+		<?php foreach($rows as $row):?>
+			<tr>
+				<td><?php echo $row['order_id']?></td>
+				<td><?php echo $row['create_time']?></td>
+				<td><?php echo $row['buy_uid']?></td>
+				<td><?php echo $row['chan_id'];?></td>						
+				<td><?php echo $row['rmb']?></td>
+				<td>
+					<?php if($row['result'] == ORDER_FINISH){
+						echo "<span style='color:#000'>成功</span> ";
+					}else{
+						echo "<span style='color:#f00'>失败</span>";
+					}
+					?>		
+				</td>
+				<td><?php echo $row['pay_sdk'];?></td>	
+				<td><?php echo $row['game']?></td>
+			</tr>
+		<?php endforeach;?>
+	</table>
+	</div>
+	<div class="pages"><?php echo $pages;?></div>
+</div>

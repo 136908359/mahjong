@@ -1,0 +1,37 @@
+﻿<div class="page-container">
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a href="add_member" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加用户</a></span> <span class="r">共有数据：<strong><?php echo count($member_list);?></strong> 条</span> </div>
+	<div class="mt-20">
+	<table class="table table-border table-bordered table-hover table-bg table-sort">
+		<thead>
+			<tr class="text-c">
+				<th width="80">Id</th>
+				<th width="40">分组</th>
+				<th width="150">备注</th>
+				<th width="40">渠道账号</th>
+				<th width="40">状态</th>				
+				<th width="100">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach($member_list as $member): ?>
+			<tr class="text-c">
+				<td><?php echo $member['account'];?></td>
+				<td><?php echo $member['group_title'];?></td>
+				<td><?php echo $member['coment'];?></td>
+				<td><?php echo $member['chan_id'];?></td>
+				<td><?php echo $member['status'];?></td>
+				<?php if($member['account']=='admin'){?>
+					<td style="color:#807c7c;font-size:16px;font-weight:bolder">---</td>
+				<?php }else{?>
+					<td class="td-manage"><a title="编辑" href="edit_member/<?php echo $member['account'];?>" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a></td>
+				<?php }?>
+			</tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+	</div>
+</div>
+
+
+
+

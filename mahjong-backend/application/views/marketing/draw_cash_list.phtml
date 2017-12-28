@@ -1,0 +1,88 @@
+<div class="page-container">
+	<form class="form-horizontal" method="get" action="">			
+		<div class="mb10">							
+				玩家ID： 
+					<input type="text" name="uid" class="input-text" style="width:200px" value="<?php echo @$uid;?>" placeholder="玩家ID"> 
+时间：
+			<input value="<?php echo @$start_time;?>" placeholder="开始时间" class="laydate-icon" onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" name="start_time"/>
+			-
+			<input value="<?php echo @$end_time;?>" placeholder="结束时间" class="laydate-icon" onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" name="end_time"/>
+			
+			<input type="submit" class="btn btn-primary" value="查看" /> 
+		    <a class="btn btn-primary" href="/v1/marketing/draw_cash_list?start_time=<?php echo date('Y-m-d 00:00:00');?>&end_time=<?php echo date('Y-m-d H:i:s');?>" class="btn">今日 </a> 
+		    <a class="btn btn-primary" href="/v1/marketing/draw_cash_list?start_time=<?php echo date('Y-m-d 00:00:00',strtotime("-6 day"));?>&end_time=<?php echo date('Y-m-d H:i:s');?>" class="btn">七天</a> 
+		    <a class="btn btn-primary" href="/v1/marketing/draw_cash_list?start_time=<?php echo date('Y-m-01 00:00:00');?>&end_time=<?php echo date('Y-m-d H:i:s');?>" class="btn">当月</a> 
+		    <a class="btn btn-primary" href="/v1/marketing/draw_cash_list?start_time=<?php echo date('Y-m-d 00:00:00',strtotime("-29 day"));?>&end_time=<?php echo date('Y-m-d H:i:s');?>" class="btn">30天</a>
+		</div>			
+	</form>
+			<table class="table table-border table-bordered table-bg table-hover table-sort dataTable no-footer mt-20">
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>玩家ID</th>
+					<th>姓名</th>
+					<th>金额</th>
+					<th>日期</th>
+					<th witch="20%"></th>					
+				</tr>
+		<tr>
+			<th>总计</th>
+			<th>--/--</th>
+			<th>--/--</th>
+			<th><?php echo number_format(@$total_rmb,1);?></th>
+			<th>--/--</th>
+			<th>--/--</th>
+		</tr>
+			</thead>
+		
+			<?php foreach($rows as $row):?>
+				<tr>				
+					<td><?php echo $row['id']; ?></td>
+					<td><?php echo $row['uid']; ?></td>
+					<td><?php echo @$row['name']; ?></td>
+					<td><?php echo $row['apply_rmb']; ?></td>
+					<td><?php echo $row['apply_time']; ?></td>
+					<?php if ( $row["status"] == 0 ): ?>
+					<td id ="td_choice_<?php echo $row["id"];?>" class="td-manage">
+						<a id="a_choice_agree_<?php echo $row["id"];?>",title="同意" href="javascript:void(0)">同意</a>	
+						<a id="a_choice_refuse_<?php echo $row["id"];?>",title="拒绝" href="javascript:void(0)">拒绝</a>
+					<?php elseif ($row["status"] == 1): ?>
+					<td>已通过</td>
+					<?php else: ?>
+					<td>未通过</td>
+					<?php endif; ?>
+				</tr>
+			<?php endforeach;?>
+		</table>
+		<div class="pages"><?php echo $pages;?></div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		var key = "a_choice_";
+		$("a[id^="+key+"]").click(function(){
+			var id = 0;
+			var code = 0;
+			var s = $(this).attr("id");
+			if (s.match("agree")) {
+				code = 1;
+				id = s.substring("a_choice_agree_".length);
+			}
+			if (s.match("refuse")) {
+				code = 2;
+				id = s.substring("a_choice_refuse_".length);
+			}
+			$.get("/v1/marketing/check_draw_cash", {"id":id,"status":code},function(msg){
+				var tag = $("#td_choice_"+id);
+				if (msg == "SUCCESS") { 
+					tips = ["","已通过","未通过"];
+					tag.html(tips[code]);
+				} else {
+					alert(msg);
+				}
+			});
+		});
+	});
+</script>
+
+

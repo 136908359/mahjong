@@ -1,0 +1,40 @@
+<div class="page-container">
+	<form class="form-horizontal" method="get" action="">			
+				<div class="mb10">							
+				玩家ID： 
+					<input type="text" name="uid_list" class="input-text" style="width:600px" value="<?php echo @$uid_list;?>" placeholder="多个玩家ID，英文分号;给开"> 
+					<input type="submit"  name='submit' class="btn btn-primary" value="查看" /> 
+				</div>			
+		</form>
+
+		<table class="table table-border table-bordered table-bg table-hover table-sort dataTable no-footer mt-20">
+			<thead>
+				<tr>
+					<th>玩家ID</th>
+					<th>房卡库存</th>
+					<th>代理等级</th>
+					<th>高级代理</th>
+					<th>游戏充卡总计</th>
+					<th>代理充卡总计</th>
+					<th>创建时间</th>
+				</tr>
+			</thead>				
+			<?php foreach($rows as $row):?>
+				<tr>
+					<td><a href="javascript:void(0)" onclick="Hui_admin_tab(this)" class="maincolor" data-title="玩家" _href="/v1/data/user_info?uid=<?php echo $row['uid'];?>"><?php echo $row['uid'];?></a></td>
+					<td><?php echo $row['agent_card']?></td>
+					<td><?php echo $row['agent_level']?></td>
+					<?php if ( @$agent['high_agent'] ):?>
+					<td>是</td>
+						<?php else:?>
+					<td>否</td>
+						<?php endif;?>
+					<td><?php echo $row['total_game_card']?></td>				
+					<td><?php echo $row['total_agent_card']?></td>				
+					<td><?php echo $row['agent_create_time']?></td>				
+				</tr>
+			<?php endforeach;?>
+
+		</table>
+		<div class="pages"><?php echo $pages;?></div>
+</div>

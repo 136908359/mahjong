@@ -1,0 +1,35 @@
+<article class="page-container">
+	<form action="" method="post" class="form form-horizontal">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">开始时间：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input value="<?php echo $broadcast['start_time']?>" class="laydate-icon" onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" name="start_time"/>				
+			</div>
+		</div>		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">结束时间：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input value="<?php echo $broadcast['end_time']?>" class="laydate-icon" onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" name="end_time"/>
+			</div>
+		</div>		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">时间间隔：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="<?php echo $broadcast['interval']?>" placeholder="（以S为单位）" name="interval">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">广播内容：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<textarea name="content" cols="" rows="" class="textarea" onKeyUp="textarealength(this,100)"><?php echo $broadcast['content']?></textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+			</div>
+		</div>				
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</article>
+

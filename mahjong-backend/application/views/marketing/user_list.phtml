@@ -1,0 +1,62 @@
+<div class="page-container">
+	<form class="form-horizontal" method="get" action="">			
+		<div class="mb10">							
+			玩家ID： 
+			<input type="text" name="uid_list" class="input-text" style="width:600px" value="<?php echo @$uid_list;?>" placeholder="多个玩家ID，英文分号;给开"> 
+			<input type="submit"  name='submit' class="btn btn-primary" value="查看" /> 
+			<a href="add_user" class="btn btn-success">新建</a>
+			<?php 
+				if ( @$parent_uid ) {
+					echo "上级代理ID：$parent_uid";
+				} else if ( @$grandpa_uid ) {
+					echo "上上级代理ID：$grandpa_uid";
+				} else if ( @$agent_uid ) {
+					echo "上级代理ID(开通代理权限): $agent_uid";
+				}
+			?>
+		</div>			
+	</form>
+		<table class="table table-border table-bordered table-bg table-hover table-sort dataTable no-footer mt-20">
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>玩家ID</th>
+					<th>姓名</th>
+					<th>推荐码</th>
+					<th>代理等级</th>
+					<th>二级会员人数</th>
+					<th>三级会员人数</th>
+					<th>下级代理人数</th>
+					<th>上级代理ID(绑定推荐码)</th>
+					<th>上级代理ID(开通代理权限)</th>
+					<th>下级充值</th>
+					<th>手机号</th>
+					<th>微信</th>
+					<th>创建时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>				
+
+					<?php foreach($rows as $row):?>
+			<tr>
+				<td><?php echo $row['id']?></td>
+				<td><a href="javascript:void(0)" onclick="Hui_admin_tab(this)" class="maincolor" data-title="玩家" _href="/v1/data/user_info?uid=<?php echo $row['uid'];?>"><?php echo $row['uid'];?></a></td>
+				<td><?php echo @$row['name']?></td>
+				<td><?php echo @$row['code']?></td>
+				<td><?php echo @$row['level_name'];?></td>	
+				<td><a href="javascript:void(0)" onclick="Hui_admin_tab(this)" class="maincolor" data-title="玩家" _href="/v1/marketing/user_list?parent_uid=<?php echo $row['uid'];?>"><?php echo $row['users_lv2'];?></a></td>
+				<td><a href="javascript:void(0)" onclick="Hui_admin_tab(this)" class="maincolor" data-title="玩家" _href="/v1/marketing/user_list?grandpa_uid=<?php echo $row['uid'];?>"><?php echo $row['users_lv3'];?></a></td>
+				<td><a href="javascript:void(0)" onclick="Hui_admin_tab(this)" class="maincolor" data-title="下级代理" _href="/v1/marketing/user_list?agent_uid=<?php echo $row['uid'];?>"><?php echo $row['agent_lv2'];?></a></td>
+				<td><a href="javascript:void(0)" onclick="Hui_admin_tab(this)" class="maincolor" data-title="玩家" _href="/v1/marketing/user_list?uid_list=<?php echo @$row['parent_uid'];?>"><?php echo @$row['parent_uid'];?></a></td>
+				<td><a href="javascript:void(0)" onclick="Hui_admin_tab(this)" class="maincolor" data-title="玩家" _href="/v1/marketing/user_list?uid_list=<?php echo @$row['agent_uid'];?>"><?php echo @$row['agent_uid'];?></a></td>
+				<td><?php echo number_format(@$row['pay_lv2']+@$row['pay_lv3'],2);?></td>	
+				<td><?php echo @$row['phone']?></td>	
+				<td><?php echo @$row['wx']?></td>	
+				<td><?php echo @$row['create_time']?></td>	
+				<td class="td-manage"><a title="编辑" href="add_user?uid=<?php echo $row['uid'];?>" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a></td>				
+			</tr>
+		<?php endforeach;?>
+
+	</table>
+	<div class="pages"><?php echo $pages;?></div>
+</div>

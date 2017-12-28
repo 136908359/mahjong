@@ -1,0 +1,56 @@
+<article class="page-container">
+	<form action="" method="post" class="form form-horizontal">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">玩家ID：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input value="<?php echo @$uid?>" class="input-text" name="uid"/>			
+			</div>
+		</div>		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">微信：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input value="<?php echo @$wx?>" class="input-text" name="wx"/>			
+			</div>
+		</div>		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">姓名：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input value="<?php echo @$name?>" class="input-text" name="name"/>			
+			</div>
+		</div>		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">手机：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input value="<?php echo @$phone?>" class="input-text" name="phone"/>	
+			</div>
+		</div>		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">等级：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<select class="input-text" name="rank" style="width:20%">
+				<?php foreach ($ranks as $k=>$v):?>
+				<option value="<?php echo $k;?>" <?php if(@$rank==$k):?>selected<?php endif; ?> > <?php echo $v;?></option>
+				<?php endforeach;?>
+				</select>
+			<!-- 请联系曾维佳 -->
+			注：一级表示有两个下级；二级表示有一个下级
+			</div>
+		</div>		
+
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</article>
+<script>
+$(document).ready(function() {
+	$(':submit').click(function(){
+		layer.confirm('代理审核通过？',function(index){
+			$('form').submit();
+		});
+		return false;
+	});
+})
+</script>

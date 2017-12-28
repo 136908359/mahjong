@@ -1,0 +1,88 @@
+<div class="page-container">
+	<table class="table">
+	<tbody>
+		<tr>
+			<th class="text-r" width="80">游戏ID：</th>
+			<td><?php echo @$uid; ?></td>
+		</tr>
+		<tr>
+			<th class="text-r">昵称：</th>
+			<td><?php echo @$nickname; ?></td>
+		</tr>
+		<tr>
+			<th class="text-r">真实姓名：</th>
+			<td><?php echo @$name; ?></td>
+		</tr>
+		<tr>
+			<th class="text-r">手机号：</th>
+			<td><?php echo @$phone; ?></td>
+		</tr>
+		<tr>
+			<th class="text-r">邀请码：</th>
+			<td><?php echo @$share_code; ?></td>
+		</tr>
+		<tr>
+			<th class="text-r">注册时间：</th>
+			<td><?php echo @$create_time; ?></td>
+		</tr>
+		<tr>
+			<th class="text-r">级别：</th>
+			<td><?php echo @$rank_name; ?></td>
+		</tr>
+
+		<tr>
+			<th class="text-r">二级人数：</th>
+			<td><?php echo @$users_lv2; ?></td>
+		</tr>
+		<tr>
+			<th class="text-r">三级人数：</th>
+			<td><?php echo @$users_lv3; ?></td>
+		</tr>
+		<tr>
+			<th class="text-r">注册时间：</th>
+			<td><?php echo @$users_lv3; ?></td>
+		</tr>
+		<tr>
+			<th class="text-r">可用金额：</th>
+			<td><?php echo number_format(@$balance,1); ?></td>
+		</tr>
+		<tr>
+			<th class="text-r">累计收益：</th>
+			<td><?php echo number_format(@$total_rebate,1); ?></td>
+		</tr>
+		<tr>
+			<th class="text-r">本月收益：</th>
+			<td><?php echo number_format(@$month_rebate,1); ?></td>
+		</tr>
+		<tr>
+			<th class="text-r">提现中：</th>
+			<td><?php echo number_format(@$apply_rebate,1); ?></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			<a class="btn btn-primary" href="add_member/<?php echo $uid;?>">成为推广员吧</a>
+			</td>
+		</tr>
+
+	</tbody>
+	</table>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		var key = "a_ignore_";
+		$("a[id^="+key+"]").click(function(){
+			var id = $(this).attr("id").substring(key.length);
+			$.get("/v1/system/update_advise", {"id":id,"result":1},function(msg){
+				var tag = $("#td_handle_"+id);
+				if (msg == "SUCCESS") { 
+					tag.html("已处理");
+				} else {
+					alert(msg);
+				}
+			});
+		});
+	});
+</script>
+
+

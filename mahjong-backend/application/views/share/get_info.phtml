@@ -1,0 +1,183 @@
+   <div data-role="content" role="main">
+        <!--<h4 style="margin-bottom:-10%">会员列表</h4>-->
+        <!--<label>会员列表</label>-->
+        <form action="/share/get_my_info" method="post" name="txform">
+          <table style="width: 90%;height:18rem;margin-left: 5%" class="ui-shadow" id="myTable">
+            <thead>
+              <tr>
+                <th colspan="2">
+                  <label style="display:inline-block;text-align: center"><b>
+我的基本信息</b></label>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <label style="display:inline-block;text-align: center"><b>
+游戏ID</b></label>
+                </td>
+                <td><?php echo $uid;?></td>
+              </tr>
+              <tr>
+                <td>
+                  <label style="display:inline-block;text-align: center"><b>
+昵称</b></label>
+                </td>
+                <td><?php echo @$nickname;?></td>
+              </tr>
+	          <tr>
+                <td>
+                  <label style="display:inline-block;text-align: center"><b>
+真实姓名</b></label>
+                </td>
+                <td><label id="name"><?php echo @$name;?></label></td>
+              </tr>
+              <tr>
+                <td style="text-align: center">
+                  <label style="display:inline-block;text-align: center"><b>
+手机号</b></label>
+                </td>
+                <td><label id="phone"><?php echo @$phone;?></label></td>
+              </tr>
+              <tr>
+                <td>
+                  <label style="display:inline-block;text-align: center"><b>
+邀请码</b></label>
+                </td>
+                <td><?php echo @$share_code;?></td>
+              </tr>
+              <tr>
+              <tr>
+                <td>
+                  <label style="display:inline-block;text-align: center"><b>
+二级人数</b></label>
+                </td>
+                <td><?php echo @$users_lv2;?></td>
+              </tr>
+<tr>
+                <td>
+                  <label style="display:inline-block;text-align: center"><b>
+三级人数</b></label>
+                </td>
+                <td><?php echo @$users_lv3;?></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <label style="display:inline-block;text-align: center"><b>
+注册时间</b></label>
+                </td>
+                <td><?php echo $create_time;?></td>
+              </tr>
+            </tbody>
+          </table>
+          <table style="width: 90%;height:8rem;margin-left: 5%;margin-top: 1rem" class="ui-shadow" id="myTable1">
+            <thead>
+              <tr>
+                <th colspan="2">
+                  <label style="display:inline-block;text-align: center"><b>
+金额信息</b></label>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="width: 30%">
+                  <label style="display:inline-block;text-align: center"><b>
+可用金额</b></label>
+                </td>
+                <td><label id="balance"><?php echo number_format($balance,1);?></label>元</td>
+              </tr>
+              <tr>
+                <td>
+                  <label style="display:inline-block;text-align: center"><b>
+累计收益</b></label>
+                </td>
+                <td><?php echo number_format(@$total_rebate,1);?>元</td>
+              </tr>
+              <tr>
+                <td>
+                  <label style="display:inline-block;text-align: center"><b>
+本月收益</b></label>
+                <td><?php echo number_format(@$month_rebate,1);?>元</td>
+              </tr>
+				<tr>
+                <td>
+                  <label style="display:inline-block;text-align: center"><b>
+提现中</b></label>
+                <td><label id="apply_rebate"><?php echo number_format($apply_rebate,1);?></label>元</td>
+              </tr>
+
+              <tr>
+                <td>
+                  <label style="display:inline-block;text-align: center"><b>
+提现金额</b></label>
+                </td>
+                <td>
+                  <div style="margin-left: 2%;width:40%;float: left">
+                      <input type="number" name="money" id="money" class="ui-input-text ui-body-c">
+                  </div>
+                  <div style="margin-left: 5%;width:30%;float: left;padding-top: 0.2rem;">
+                      <input id="bnt_draw_cash" type="button" data-inline="true" data-mini="true" data-theme="b" value="微信提现" class="ui-btn-hidden" data-disabled="false">
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <input type="hidden" name="__hash__" value="9127f65cf0960f59f360173206c05b6d_4249441e8d96d708b084fde9f2df0576">
+        </form>
+      </div>
+    <script>
+      $(document).on("click", "#bnt_draw_cash", function() {
+		var phone = $("#phone").html();
+		var name = $("#name").html();
+		if (phone == "" || name == "") {
+			layer.open({
+                content: "请完善个人信息",
+                btn: ['去完善','下次吧'],
+				yes: function(index) {
+					location.href = "/public/share/update_info";
+				}
+              });
+
+			return;
+		}
+
+        var money = parseFloat($("#money").val());
+		var balance = parseFloat($("#balance").html().replace(',',''));
+		var apply_rebate = parseFloat($("#apply_rebate").html().replace(',',''));
+		var need_money = parseFloat(<?php echo $need_money;?>);
+        if (isNaN(money) || money < need_money) {
+          msg('提现金额不能小于'+need_money);
+
+        } else if (money > balance) {
+          msg('提现金额不能大于可用金额');
+
+        } else {
+          $.post("/public/share/draw_cash", {
+              money: money
+            },
+            function(data) {
+			  if (data == "SUCCESS") {
+			  	 data = "1个工作日内将放入微信红包";
+			     $("#balance").html((balance-money).toFixed(1));
+			     $("#apply_rebate").html((apply_rebate+money).toFixed(1));
+			  }
+              layer.open({
+                content: data,
+                btn: '我知道了'
+              });
+            });
+
+        }
+
+      });
+
+      function msg(txt) {
+        layer.open({
+          content: txt,
+          btn: '好的'
+        });
+      }
+    </script>

@@ -1,0 +1,92 @@
+		<div data-role="content" role="main">
+			<form action="/public/agent/add_card" method="post" name="main_form">
+				<table data-role="table">
+					<thead>
+						<tr>
+							<th data-priority="1"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td style="text-align: center"><label><b>玩家ID:</b></label>
+								<input type="text" name="other_uid" id="other_uid" placeholder="玩家ID">
+								<p style="text-align: center">您的当前房卡库存为<label style="color: #8b0000" id="total_card"><?php echo $agent_card;?></label>张</p>
+								<p hidden id="tip" style="text-align: center"></p>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: center;border-bottom: 0px;"><label><b>房卡数量:</b></label>
+								<input type="number" name="card" id="card" placeholder="数量/张">
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: center">
+								<input type="hidden" name="add_card_method" id="add_card_method">
+								<input type="button" data-theme="b" value="发给玩家">
+								<?php if ($high_agent):?>
+								<input type="button" data-theme="b" value="发给代理">
+								<?php endif;?>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+	</div>
+	<script>
+	$(document).ready(function(){
+		$("#other_uid").blur(function(){
+			$other_uid = $(this).val();
+			if ( $other_uid == "" ) {
+				return;
+			}
+			$.getJSON("/public/agent/user/"+$other_uid,function(data){
+				msg = data.msg;
+				if ( msg ) {
+					msg = '<span style="font-size:150%;color:red">'+msg+'</span>';
+				} else {
+					msg = '<span style="font-size:larger">'+data.nickname+'</span><span style="color:#8b0000">'+data.score_card+"</span>张";
+					if (data.agent_card) {
+						msg = msg +",代理库存"+'<span style="color:#8b0000">'+data.agent_card+"</span>张";
+					}
+					msg = msg+"(注:存在延迟)";
+				}
+				$("#tip").html(msg);
+				$("#tip").show();
+			});
+		});
+		$(":button").click(function () {
+			total_card = $("#total_card").html();
+			other_uid= $("#other_uid").val();
+			card= $("#card").val();
+			
+			if (card == "") {
+				msg('请输入房卡');
+			} else if (other_uid == "") {
+				msg('请输入玩家ID');
+			} else if (parseInt(card) > parseInt(total_card)) {
+				msg('房卡不够');
+			} else {
+				$("#add_card_method").val($(this).val())
+				layer.open({
+               		content: "确定发送？",
+                	btn: ['确定','取消'],
+					yes: function(index) {
+						document.main_form.submit();
+					}
+              	});
+			}
+		});
+
+		function msg(txt) {
+			layer.open({
+				content: txt
+				, btn: '知道了'
+			});
+		}
+		var tip = '<?php echo @$tip;?>';
+		if (tip != '') {
+			msg(tip);
+		}
+		});
+	</script>
+	

@@ -1,0 +1,33 @@
+﻿<div class="page-container">
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a href="add_chans" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加渠道</a></span> <span class="r">共有数据：<strong><?php echo count($chan_list);?></strong> 条</span> </div>
+	<div class="mt-20">
+	<table class="table table-border table-bordered table-hover table-bg table-sort">
+		<thead>
+			<tr class="text-c">
+				<th width="80">Id</th>
+				<th width="40">渠道名</th>
+				<th width="150">备注</th>
+				<th width="40">状态</th>
+				<th width="40">创建时间</th>				
+				<th width="100">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach($chan_list as $v): ?>
+			<tr class="text-c">
+				<td><?php echo $v['id'];?></td>
+				<td><?php echo $v['chan'];?></td>
+				<td><?php echo $v['coment'];?></td>
+				<td><?php echo $v['status'];?></td>
+				<td><?php echo $v['create_time'];?></td>
+				<td class="td-manage"><a title="编辑" href="edit_chans/<?php echo $v['id'];?>" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> </td>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+	</div>
+</div>
+
+
+
+
+

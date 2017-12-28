@@ -1,0 +1,49 @@
+<div class="page-container">
+	<form class="form-horizontal" method="post" action="/v1/picdata/golds">			
+			<table class="table table-border table-bordered table-bg table-hover table-sort dataTable no-footer mt-20">
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>姓名</th>
+					<th>金额</th>
+					<th>日期</th>
+					<th>操作</th>					
+				</tr>
+			</thead>
+			<?php foreach($list as $row):?>
+				<tr>				
+					<td><?php echo $row['id']; ?></td>
+					<td><?php echo @$row['name']; ?></td>
+					<td><?php echo $row['apply_rmb']; ?></td>
+					<td><?php echo $row['apply_time']; ?></td>
+					<?php if ( $row["status"] == 0 ): ?>
+					<td id ="td_agree_<?php echo $row["id"];?>" class="td-manage"><a id="a_agree_<?php echo $row["id"];?>",title="同意" href="javascript:void(0)">同意</a></td>				
+					<?php elseif ($row["status"] == 1): ?>
+					<td>已通过</td>
+					<?php else: ?>
+					<td>未通过</td>
+					<?php endif; ?>
+					<td></td>
+				</tr>
+			<?php endforeach;?>
+		</table>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		var key = "a_agree_";
+		$("a[id^="+key+"]").click(function(){
+			var id = $(this).attr("id").substring(key.length);
+			$.post("/v1/system/check_draw_cash", {"id":id},function(msg){
+				var tag = $("#td_agree_"+id);
+				if (msg == "SUCCESS") { 
+					tag.html("已通过");
+				} else {
+					alert(msg);
+				}
+			});
+		});
+	});
+</script>
+
+

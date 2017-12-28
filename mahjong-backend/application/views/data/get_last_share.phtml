@@ -1,0 +1,23 @@
+<div class="page-container">
+		<table class="table table-border table-bordered table-bg table-hover table-sort dataTable no-footer mt-20">
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>玩家ID</th>
+					<th>昵称</th>
+					<th>上级</th>
+					<th>日期</th>
+				</tr>
+			</thead>
+			<?php foreach ($last as $id=>$row): ?>
+                    <tr>
+						<td><?php echo $id+1 ?></td>
+						<td><?php echo $row['uid']; ?></td>
+						<td><?php echo $row['nickname']; ?></td>
+						<td><?php echo $row['parent_uid']; ?></td>
+						<td><?php echo $row['create_time']; ?></td>
+                    </tr>
+			<?php endforeach;?>
+			</table>
+	<div class="pages"><?php echo $pages;?></div>
+</div>

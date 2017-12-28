@@ -1,0 +1,43 @@
+   <div data-role="content" role="main">
+        <!--<h4 style="margin-bottom:-10%">会员列表</h4>-->
+        <!--<label>会员列表</label>-->
+          <table style="width: 90%;margin-left: 5%" class="ui-shadow">
+            <thead>
+              <tr>
+                <th colspan="2">
+                  <label style="display:inline-block;text-align: center"><b>
+我的基本信息</b></label>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <label style="display:inline-block;text-align: center"><b>
+游戏ID</b></label>
+                </td>
+                <td><?php echo $uid;?></td>
+              </tr>
+              <tr>
+                <td>
+                  <label style="display:inline-block;text-align: center"><b>
+昵称</b></label>
+                </td>
+                <td><?php echo $nickname;?></td>
+              </tr>
+              <td>
+                  <label style="display:inline-block;text-align: center"><b>
+注册时间</b></label>
+                </td>
+                <td><?php echo $create_time;?></td>
+              </tr>
+              <tr>
+                <td style="width: 30%">
+                  <label style="display:inline-block;text-align: center"><b>可用房卡</b></label>
+                </td>
+                <td><label><?php echo $agent_card; ?></label>张</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+ 

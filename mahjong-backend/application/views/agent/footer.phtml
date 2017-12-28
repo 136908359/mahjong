@@ -1,0 +1,24 @@
+	 <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+          <ul>
+            <li>
+              <a data-theme="c" data-ajax="false" href="/public/agent/add_card">发放房卡</a>
+            </li>
+
+            <li>
+              <a data-theme="c" data-ajax="false" href="/public/agent/get_card_log">历史纪录</a>
+            </li>
+
+            <li>
+              <a data-theme="c" data-ajax="false" href="/public/agent/get_info">个人中心</a>
+            </li>
+          </ul>
+        </div>
+	  </div>
+	  <script>
+	  	url = location.pathname;	
+		$("[href='"+url+"']").attr("class","ui-bnt-active ui-state-persist");
+	  </script>
+    </div> <!-- page -->
+  </body>
+</html>

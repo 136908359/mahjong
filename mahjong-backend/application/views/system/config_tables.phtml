@@ -1,0 +1,45 @@
+<div class="page-container">
+		<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a href="set_config_table" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加配置表</a></span> </div>
+		<table class="table table-border table-bordered table-bg table-hover table-sort dataTable no-footer mt-20">
+			<thead>
+				<tr>
+					<th>表名</th>
+					<th>更新时间</th>
+					<th>生效时间</th>
+					<th>备注</th>
+					<th></th>
+				</tr>
+			</thead>
+			<?php foreach($rows as $row):?>
+				<tr>				
+					<td><?php echo $row['name']; ?></td>
+					<td><?php echo $row['update_time']; ?></td>
+					<td id="td_effect_time_<?php echo $row['name']?>"><?php echo $row['effect_time']; ?></td>
+					<td width="40%"><?php echo $row['comment']; ?></td>
+					<td><a title="编辑" href="set_config_table?id=<?php echo $row['id'];?>" href="javascript:void(0)">编辑</a>&nbsp;<a title="生效" id="a_effect_<?php echo $row['name']?>" href="javascript:void(0)">生效</a> </td>
+				</tr>
+			<?php endforeach;?>
+		</table>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$("a[id^=a_effect_]").click(function(){
+			var name = $(this).attr("id").substring("a_effect_".length);
+			$.get("/v1/system/effect_config_table", {name:name},function(msg){
+				try {
+					data = JSON.parse(msg);
+					if (data.Code == 0) { 
+						$('#td_effect_time_'+name).html(data.EffectTime);
+						alert(name+"已生效");
+					} else {
+						alert(data.Msg);
+					}
+				} catch (e) {
+					alert("出错了");
+				}
+			});
+		});
+	});
+</script>
+
+
